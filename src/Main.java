@@ -76,7 +76,7 @@ public class Main
             for (String i : menuList)
             {
                 counter++;
-                System.out.println(counter + ". " + i);
+                System.out.println(counter + ": " + i);
             }
         }
     }
