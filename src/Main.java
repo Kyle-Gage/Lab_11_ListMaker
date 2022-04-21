@@ -1,15 +1,14 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main
 {
 
-    private static  ArrayList<String> menuList = new ArrayList<>();
+    static ArrayList<String> menuList = new ArrayList<>();
 
     public static void main(String[] args)
     {
-
-	ArrayList<String> menuList = new ArrayList<>();
     Scanner in = new Scanner(System.in);
 
     boolean done = false;
@@ -18,39 +17,47 @@ public class Main
     String menuChoice = "";
     String userInput = "";
 
+
     int listNum;
 
     do
     {
-        System.out.print("Please choose an option: ");
-        menuChoice = SafeInput.getRegExString(in, "\n A – Add an item to the list \n D – Delete an item from the list \n P – Print the list \n Q – Quit the program","\n [aAdDpPqQ]");
+        System.out.print("\n Please choose one of the following options ");
+        menuChoice = SafeInput.getRegExString(in, "\n A – Add an item to the list \n D – Delete an item from the list \n P – Print the list \n Q – Quit the program","[aAdDpPqQ]");
+
 
         switch(menuChoice)
         {
             case "A":
                 userInput = SafeInput.getNonZeroLenString(in, "Enter an item to add to the list: ");
                 menuList.add(userInput);
-                System.out.println(userInput + "has been added to the list! ");
+                System.out.println(userInput + " has been added to the list! ");
                 break;
             case "D":
                 if (menuList.size() > 0)
                 {
-
+                    listNum = SafeInput.getRangedInt(in,"Please enter the number corresponding to the list item you want to delete: ",1, menuList.size());
+                    listNum = listNum - 1;
+                    System.out.println("The following number has been deleted from the list: " + menuList.get(listNum));
+                    menuList.remove(listNum);
                 }
                 else
                 {
-                    System.out.println("There is currently nothing in the list to delete");
+                    System.out.println("\n There is currently nothing in the list to delete");
                 }
                 break;
             case "P":
-                System.out.println("The current list looks like: ");
                 displayArrayList();
                 break;
             case "Q":
                 userQuit = SafeInput.getYNConfirm(in,"Are you sure you want to quit?: ");
+                if (userQuit)
+                {
+                    System.out.println("Quitting program");
+                    System.exit(0);
+                }
                 break;
         }
-
     }while(!done); // deliberate infinite loop
     }
 
@@ -65,9 +72,13 @@ public class Main
         }
         else
         {
-            System.out.println(menuList);
-            counter++;
-            System.out.println("There are " + counter + "items in the list");
+            for (String i : menuList)
+            {
+                counter++;
+                System.out.println("The current list looks like: ");
+                System.out.println(menuList);
+                System.out.println("There are " + counter + " items in the list");
+            }
         }
     }
 }
