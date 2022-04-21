@@ -23,22 +23,22 @@ public class Main
     do
     {
         System.out.print("\n Please choose one of the following options ");
-        menuChoice = SafeInput.getRegExString(in, "\n A – Add an item to the list \n D – Delete an item from the list \n P – Print the list \n Q – Quit the program","[aAdDpPqQ]");
-
+        menuChoice = SafeInput.getRegExString(in, "\n A – Add an item to the list \n D – Delete an item from the list \n P – Print the list \n Q – Quit the program", "[aAdDpPqQ]");
 
         switch(menuChoice)
         {
-            case "A":
+            case "A": case "a":
                 userInput = SafeInput.getNonZeroLenString(in, "Enter an item to add to the list: ");
                 menuList.add(userInput);
                 System.out.println(userInput + " has been added to the list! ");
                 break;
-            case "D":
+            case "D": case "d":
                 if (menuList.size() > 0)
                 {
+                    displayArrayList();
                     listNum = SafeInput.getRangedInt(in,"Please enter the number corresponding to the list item you want to delete: ",1, menuList.size());
-                    listNum = listNum - 1;
-                    System.out.println("The following number has been deleted from the list: " + menuList.get(listNum));
+                    listNum = listNum - 1; // Subtract because not asking computer scientists
+                    System.out.println("The following item has been deleted from the list: " + menuList.get(listNum));
                     menuList.remove(listNum);
                 }
                 else
@@ -46,10 +46,10 @@ public class Main
                     System.out.println("\n There is currently nothing in the list to delete");
                 }
                 break;
-            case "P":
+            case "P": case "p":
                 displayArrayList();
                 break;
-            case "Q":
+            case "Q": case "q":
                 userQuit = SafeInput.getYNConfirm(in,"Are you sure you want to quit?: ");
                 if (userQuit)
                 {
@@ -72,12 +72,11 @@ public class Main
         }
         else
         {
+            System.out.println("\n The current list looks like: ");
             for (String i : menuList)
             {
                 counter++;
-                System.out.println("The current list looks like: ");
-                System.out.println(menuList);
-                System.out.println("There are " + counter + " items in the list");
+                System.out.println(counter + ". " + i);
             }
         }
     }

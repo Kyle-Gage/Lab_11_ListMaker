@@ -185,13 +185,14 @@ public class SafeInput {
      * @param regEx  - A pattern in java String format to use for matching
      * @return - Return a user entered string that matches the pattern
      */
-    public static String getRegExString(Scanner pipe, String prompt, String regEx) {
+    public static String getRegExString(Scanner pipe, String prompt, String regEx)
+    {
         boolean done = false;
         String trash = "";
         String retVal = "";
 
         do {
-            System.out.print("\n" + prompt + " " + regEx + ": ");
+            System.out.print("\n" + prompt + " \n " + regEx + ": ");
             retVal = pipe.nextLine();
 
             if (retVal.matches(regEx)) {
